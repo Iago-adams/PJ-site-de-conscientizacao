@@ -1,1 +1,0 @@
-op = Opcao(text="Não sei", questao_fk=10)

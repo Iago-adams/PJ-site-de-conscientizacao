@@ -1,7 +1,6 @@
 from app import app, db
 from flask import render_template, request, redirect, url_for
 from app.model import Questao, Opcao, Resposta
-from app.form import RespostaForm
 
 @app.route('/')
 def homepage():
@@ -12,7 +11,6 @@ def homepage():
 def questionario():
     questoes = Questao.query.order_by('id')
     opcoes = Opcao.query.order_by('id')
-    form = RespostaForm()
 
     if request.method == 'POST':
         for questao in questoes:
@@ -23,7 +21,7 @@ def questionario():
         db.session.commit()
         return redirect(url_for('homepage'))  # Redireciona após o envio
 
-    return render_template('questionario.html', questoes=questoes, opcoes=opcoes, form=form)
+    return render_template('questionario.html', questoes=questoes, opcoes=opcoes)
 
 
 @app.route('/resultados')
