@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados do Questionário</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Resultados do Questionário</h1>
+    {% for dado in dados %}
+        <div style="width: 400px; margin-bottom: 40px;">
+            <h3>{{ dado.questao }}</h3>
+            <canvas id="grafico{{ loop.index }}"></canvas>
+        </div>
+    {% endfor %}
+
+    <script>
+        const dadosGraficos = JSON.parse('{{ dados|tojson|safe }}');
+        dadosGraficos.forEach(function(dado, idx) {
+            const ctx = document.getElementById('grafico' + (idx + 1)).getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: dado.opcoes,
+                    datasets: [{
+                        label: 'Votos',
+                        data: dado.votos,
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
