@@ -1,9 +1,9 @@
-from app import app, db
-from flask import render_template, request, redirect, url_for
-from app.model import Questao, Opcao, Resposta
+from app import app
+from flask import render_template
 
 @app.route('/')
 def homepage():
+<<<<<<< HEAD
     return render_template('index.html')
 
 
@@ -41,3 +41,6 @@ def resultados():
         })
     return render_template('resultados.html', dados=dados)
 
+=======
+    return render_template('index.html')
+>>>>>>> parent of 9850bb5 (Merge branch 'main' of https://github.com/Iago-adams/PJ-site-de-conscientizacao)
