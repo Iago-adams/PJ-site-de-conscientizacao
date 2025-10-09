@@ -19,7 +19,7 @@ def questionario():
                 resposta = Resposta(questao_fk=questao.id, opcao_fk=int(opcao_id))
                 db.session.add(resposta)
         db.session.commit()
-        return redirect(url_for('homepage'))  # Redireciona após o envio
+        return redirect(url_for('homepage'))
 
     return render_template('questionario.html', questoes=questoes, opcoes=opcoes)
 
