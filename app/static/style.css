@@ -224,17 +224,17 @@ nav a.ativo {
 
 .equipe {
     display: flex;
-    flex-wrap: wrap; /* Permite quebrar linha */
+    flex-wrap: wrap;
     gap: 50px;
-    justify-content: center; /* Centraliza os grupos na horizontal */
+    justify-content: center; 
 }
 
 .membro {
     display: flex;
-    flex-direction: column; /* Alinha imagem e texto na horizontal */
+    flex-direction: column; 
     align-items: center;
     gap: 15px;
-    width: 200px; /* Largura fixa pra manter alinhamento das colunas */
+    width: 200px;
 }
 
 .membro img {
@@ -256,19 +256,19 @@ nav a.ativo {
 
 @media (max-width: 768px) {
     .equipe {
-        grid-template-columns: repeat(2, 1fr); /* 2 por linha no tablet/celular */
+        grid-template-columns: repeat(2, 1fr); 
     }
 }
 
 @media (max-width: 480px) {
     .equipe {
-        grid-template-columns: 1fr; /* 1 por linha no celular pequeno */
+        grid-template-columns: 1fr;
     }
 }
 
 @media (max-width: 768px) {
   .membro {
-    width: 100%; /* força quebrar para linha única */
+    width: 100%; 
     justify-content: flex-start;
   }
 }
@@ -294,7 +294,7 @@ nav a.ativo {
 }
 
 .form-card h2 {
-  font-size: 2.5rem; /* título maior */
+  font-size: 2.5rem;
   margin-bottom: 30px;
   color: #0b6477;
   text-align: center;
@@ -305,7 +305,7 @@ nav a.ativo {
 }
 
 .question-text {
-  font-size: 1.5rem; /* tamanho da pergunta maior */
+  font-size: 1.5rem; 
   font-weight: 600;
   margin-bottom: 15px;
   color: #333;
@@ -313,7 +313,7 @@ nav a.ativo {
 
 .option-label {
   display: block;
-  font-size: 1.25rem; /* tamanho das opções maior */
+  font-size: 1.25rem; 
   margin-bottom: 10px;
   cursor: pointer;
   color: #555;
@@ -322,7 +322,7 @@ nav a.ativo {
 .submit-btn {
   display: block;
   width: 100%;
-  font-size: 1.5rem; /* tamanho do botão maior */
+  font-size: 1.5rem;
   padding: 15px;
   background-color: #0b6477;
   color: #fff;
@@ -348,23 +348,6 @@ nav a.ativo {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .texto-intermediario {
     padding: 200px 20px;
     background-color: #0b6477;
@@ -372,7 +355,7 @@ nav a.ativo {
 }
 
 .texto-intermediario h2 {
-    font-size: 3em; /* Aumentado */
+    font-size: 3em; 
     margin-bottom: 25px;
     color: #ffffff;
     font-weight: bold;
@@ -382,7 +365,7 @@ nav a.ativo {
 }
 
 .texto-intermediario p {
-    font-size: 1.6em; /* Também aumentado */
+    font-size: 1.6em; 
     color: #ffffff;
     max-width: 900px;
     margin: 0 auto;
@@ -390,7 +373,7 @@ nav a.ativo {
 }
 
 .linha-titulo {
-    width: 80px; /* largura da linha */
+    width: 80px; 
     border: 2px solid #fff;
     margin: 10px 0 30px 0;
 
