@@ -1,71 +1,33 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questionário - Intolerância Religiosa</title>
+{% extends "base.html" %}
 
-    <!-- CSS principal -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
 
-    <!-- Fonte Roboto -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+{% block title %}Questionário - Intolerância Religiosa{% endblock %}
 
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+{% block content %}
+<main class="form-container">
+  <div class="form-card">
+    <h2>Questionário sobre Intolerância Religiosa</h2>
 
-<body>
-    <!-- Navbar -->
-    <header>
-        <div class="navbar d-flex justify-content-between align-items-center px-4 py-3 shadow-sm bg-white">
-            <div class="titulo fs-4 fw-bold text-primary">Intolerância Religiosa</div>
-            <nav>
-                <a href="#" class="mx-2 text-decoration-none text-dark">Home</a>
-                <a href="#" class="mx-2 text-decoration-none text-dark">Sobre nós</a>
-                <a href="{{ url_for('questionario') }}" class="mx-2 text-decoration-none fw-bold text-primary">Questionário</a>
-                <a href="{{ url_for('resultados') }}" class="mx-2 text-decoration-none text-dark">Resultados</a>
-            </nav>
+    <form id="questionario-form" method="post">
+      {% for questao in questoes %}
+        <div class="question-block">
+          <p class="question-text">{{ loop.index }}. {{ questao.text }}</p>
+
+          {% for opcao in questao.opcoes %}
+            <label class="option-label">
+              <input type="radio" name="questao_{{ questao.id }}" value="{{ opcao.id }}" required>
+              {{ opcao.text }}
+            </label>
+          {% endfor %}
         </div>
-    </header>
+      {% endfor %}
 
-    <!-- Conteúdo principal -->
-    <main class="container my-5">
-        <div class="card shadow p-4 mx-auto" style="max-width: 700px;">
-            <h2 class="text-center mb-4 text-primary">Questionário sobre Intolerância Religiosa</h2>
-
-            <form method="post">
-
-                {% for questao in questoes %}
-                    <div class="mb-4">
-                        <p class="fw-semibold">{{ loop.index }}. {{ questao.text }}</p>
-
-                        {% for opcao in questao.opcoes %}
-                            <div class="form-check">
-                                <input class="form-check-input" 
-                                       type="radio" 
-                                       name="questao_{{ questao.id }}" 
-                                       value="{{ opcao.id }}" 
-                                       id="opcao_{{ opcao.id }}" required>
-                                <label class="form-check-label" for="opcao_{{ opcao.id }}">
-                                    {{ opcao.text }}
-                                </label>
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% endfor %}
-
-                <button type="submit" class="btn btn-primary w-100">Enviar Respostas</button>
-            </form>
-        </div>
-    </main>
-
-    <!-- Rodapé opcional -->
-    <footer class="text-center py-4 text-muted small">
-        © 2025 - Projeto Intolerância Religiosa
-    </footer>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+      <button type="submit" class="submit-btn">Enviar Respostas</button>
+    </form>
+  </div>
+</main>
+{% endblock %}
