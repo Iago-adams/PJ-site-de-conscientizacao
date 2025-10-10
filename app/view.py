@@ -41,3 +41,6 @@ def resultados():
         })
     return render_template('resultados.html', dados=dados)
 
+@app.route('/sobrenos')
+def sobrenos():
+    return render_template('sobrenos.html')

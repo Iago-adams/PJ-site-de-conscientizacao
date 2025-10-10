@@ -1,42 +1,208 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Resultados do Questionário</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <title>Resultados do Questionário</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f5f5;
+      padding-top: 80px; /* espaço para a navbar */
+    }
+
+    /* Navbar */
+    header {
+      background-color: #0b6477;
+      color: white;
+      padding: 20px 40px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .titulo {
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    nav a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    /* Título da página */
+    h1 {
+      text-align: center;
+      color: #0b6477;
+      font-size: 2.8rem;
+      margin: 40px 20px;
+    }
+
+    /* Grid dos gráficos */
+    .graficos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    /* Card de cada gráfico */
+    .grafico-container {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    .grafico-container:hover {
+      transform: translateY(-5px);
+    }
+
+    .grafico-container h3 {
+      font-size: 1.4rem;
+      color: #333;
+      margin-bottom: 20px;
+      text-align: center;
+      min-height: 70px;
+    }
+
+    canvas {
+      width: 100% !important;
+      max-width: 300px;
+      height: 300px !important;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .grafico-container h3 {
+        font-size: 1.1rem;
+      }
+
+      canvas {
+        max-width: 240px;
+        height: 240px !important;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>Resultados do Questionário</h1>
-    {% for dado in dados %}
-        <div style="width: 400px; margin-bottom: 40px;">
-            <h3>{{ dado.questao }}</h3>
-            <canvas id="grafico{{ loop.index }}"></canvas>
-        </div>
-    {% endfor %}
 
-    <script>
-        const dadosGraficos = JSON.parse('{{ dados|tojson|safe }}');
-        dadosGraficos.forEach(function(dado, idx) {
-            const ctx = document.getElementById('grafico' + (idx + 1)).getContext('2d');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: dado.opcoes,
-                    datasets: [{
-                        label: 'Votos',
-                        data: dado.votos,
-                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
-                    }]
+  <!-- Navbar -->
+  <header>
+    <div class="navbar">
+      <div class="titulo">Intolerância Religiosa</div>
+      <nav>
+        <a href="{{ url_for('homepage') }}">Home</a>
+        <a href="{{ url_for('sobrenos') }}">Sobre nós</a>
+        <a href="{{ url_for('questionario') }}">Forms</a>
+        <a href="{{ url_for('resultados') }}">Resultados</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Título -->
+  <h1>Resultados do Questionário</h1>
+
+  <!-- Gráficos -->
+  <div class="graficos-grid">
+    {% for dado in dados %}
+      <div class="grafico-container">
+        <h3>{{ dado.questao }}</h3>
+        <canvas id="grafico{{ loop.index }}"></canvas>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Script do Chart.js -->
+  <script>
+    const dadosGraficos = JSON.parse('{{ dados|tojson|safe }}');
+
+    dadosGraficos.forEach(function(dado, idx) {
+      const ctx = document.getElementById('grafico' + (idx + 1)).getContext('2d');
+
+      new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: dado.opcoes,
+          datasets: [{
+            data: dado.votos,
+            backgroundColor: [
+              '#0b6477', '#4dc9f6', '#f67019', '#f53794', '#acc236',
+              '#7b68ee', '#ffa07a', '#66cdaa'
+            ],
+            borderColor: '#fff',
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                font: {
+                  size: 14
                 },
-                options: {
-                    scales: {
-                        y: { beginAtZero: true }
-                    }
+                color: '#333'
+              }
+            },
+            tooltip: {
+              titleFont: {
+                size: 16
+              },
+              bodyFont: {
+                size: 14
+              },
+              callbacks: {
+                label: function(context) {
+                  const label = context.label || '';
+                  const value = context.raw || 0;
+                  return `${label}: ${value} voto(s)`;
                 }
-            });
-        });
-    </script>
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>

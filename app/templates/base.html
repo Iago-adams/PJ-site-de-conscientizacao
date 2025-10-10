@@ -1,14 +1,29 @@
+<!-- templates/base.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesquisa</title>
+    <title>{% block title %}Título da Página{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    
-    {% block content %}
-    {% endblock%}
+
+    <header>
+        <div class="navbar">
+            <div class="titulo">Intolerância Religiosa</div>
+            <nav>
+                <a href="{{ url_for('homepage') }}">Home</a>
+                <a href="{{ url_for('sobrenos') }}">Sobre nós</a>
+                <a href="{{ url_for('questionario') }}">Forms</a>
+                <a href="{{ url_for('resultados') }}">Resultados</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
 
 </body>
 </html>

@@ -1,39 +1,31 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intolerância Religiosa</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <!-- Navbar -->
-    <header>
-        <div class="navbar">
-            <div class="titulo">Intolerância Religiosa</div>
-            <nav>
-                <a href="#">home</a>
-                <a href="#" class="ativo">Sobre nós</a>
-                <a href="{{url_for('questionario')}}" class="ativo">questionario</a>
-                <a href="{{url_for('resultados')}}" class="ativo">resultados</a>
-            </nav>
-        </div>
-    </header>
+{% extends "base.html" %}
 
-    <!-- Conteúdo principal -->
-    <main class="conteudo">
-        <div class="texto">
-         <h2>
-            <span>Menos</span><br>
-            <em>intolerância</em>,<br>
-            <span>mais</span><br>
-            <em>respeito</em>
-         </h2>
-        </div>
-        <div class="imagem">
-            <img src="{{ url_for('static', filename='intolerancia.jpg') }}" alt="Diversidade Religiosa">
-        </div>
-    </main>
-</body>
-</html>
+{% block title %}Página Inicial{% endblock %}
+
+{% block content %}
+
+<!-- Seção principal -->
+<section class="principal">
+    <div class="imagem">
+        <img src="{{ url_for('static', filename='intolerancia.png') }}" alt="Diversidade Religiosa">
+    </div>
+    <div class="texto">
+        <h2>
+            <span>Menos</span> <em>intolerância</em>,<br>
+            <span>Mais</span> <em>respeito</em>.
+        </h2>
+    </div>
+</section>
+
+<!-- Seção do QR Code -->
+<section class="forms">
+    <div class="qrcode">
+        <img src="{{ url_for('static', filename='qrcode.png') }}" alt="QR Code">
+    </div>
+    <div class="texto-forms">
+        <h3>FORMS</h3>
+        <p>Este forms tem como objetivo recolher dados para futuras análises.</p>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Sobre Nós{% endblock %}
+
+{% block content %}
+<section class="sobre-nos">
+    <div class="texto-topo">
+        <h1>Quem Somos</h1>
+        <p>Somos um grupo comprometido com a conscientização sobre a intolerância religiosa. Este projeto foi construído com colaboração, respeito e dedicação por todos os envolvidos.</p>
+    </div>
+
+    <div class="equipe">
+        <div class="membro">
+            <img src="{{ url_for('static', filename='pessoa1.png') }}" alt="Pessoa 1">
+            <p>Bianca </p>
+        </div>
+        <div class="membro">
+            <img src="{{ url_for('static', filename='pessoa1.png') }}" alt="Pessoa 2">
+            <p>Gragório</p>
+        </div>
+        <div class="membro">
+            <img src="{{ url_for('static', filename='pessoa1.png') }}" alt="Pessoa 3">
+            <p>Iago</p>
+        </div>
+        <div class="membro">
+            <img src="{{ url_for('static', filename='pessoa1.png') }}" alt="Pessoa 4">
+            <p>Laísa</p>
+        </div>
+        <div class="membro">
+            <img src="{{ url_for('static', filename='pessoa1.png') }}" alt="Pessoa 5">
+            <p>Sergio</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
