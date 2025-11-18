@@ -4,30 +4,129 @@
 
 {% block content %}
 
-<section class="principal">
-    <div class="imagem">
-        <img src="{{ url_for('static', filename='intolerancia.png') }}" alt="Diversidade Religiosa">
-    </div>
-    <div class="texto">
+<style>
+    /* Estilo exclusivo da Home para deixá-la compacta e bonita */
+    .hero-section {
+        display: flex; /* Coloca lado a lado */
+        align-items: center; /* Centraliza verticalmente */
+        justify-content: space-between;
+        gap: 50px;
+        min-height: 80vh; /* Ocupa 80% da altura da tela (sem scrolar muito) */
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .hero-texto {
+        flex: 1; /* Ocupa metade do espaço */
+        max-width: 600px;
+    }
+
+    .hero-texto h2 {
+        font-size: 3.5rem;
+        line-height: 1.1;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .hero-texto span {
+        font-weight: 300; /* Letra mais fina */
+        color: #555;
+    }
+
+    .hero-texto em {
+        font-style: normal;
+        color: #0b6477; /* Cor principal do seu tema */
+        font-weight: bold;
+    }
+
+    .hero-resumo {
+        font-size: 1.1rem;
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        border-left: 4px solid #0b6477; /* Detalhe estético na borda */
+        padding-left: 15px;
+    }
+
+    .btn-cta {
+        display: inline-block;
+        background-color: #0b6477;
+        color: white;
+        padding: 12px 35px;
+        font-size: 1.1rem;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        box-shadow: 0 4px 15px rgba(11, 100, 119, 0.3);
+        transition: transform 0.2s ease, background 0.2s;
+    }
+
+    .btn-cta:hover {
+        background-color: #084a57;
+        transform: translateY(-3px); /* Efeito de "pulo" ao passar o mouse */
+    }
+
+    .hero-imagem {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .hero-imagem img {
+        max-width: 100%;
+        height: auto;
+        max-height: 500px; /* Limita o tamanho para não ficar gigante */
+        border-radius: 20px; /* Bordas arredondadas */
+        box-shadow: 20px 20px 0px rgba(11, 100, 119, 0.1); /* Sombra sólida estilosa */
+    }
+
+    /* Responsividade para celular */
+    @media (max-width: 900px) {
+        .hero-section {
+            flex-direction: column-reverse; /* Inverte a ordem no celular */
+            text-align: center;
+            padding-top: 40px;
+            min-height: auto;
+        }
+        
+        .hero-resumo {
+            border-left: none;
+            padding-left: 0;
+        }
+        
+        .hero-texto h2 {
+            font-size: 2.5rem;
+        }
+
+        .hero-imagem img {
+            max-height: 300px;
+            margin-bottom: 30px;
+        }
+        
+        .hero-imagem {
+            justify-content: center;
+        }
+    }
+</style>
+
+<section class="hero-section">
+    <div class="hero-texto">
         <h2>
             <span>Menos</span> <em>intolerância</em>,<br>
             <span>Mais</span> <em>respeito</em>.
         </h2>
-    </div>
-</section>
-
-<section class="texto-intermediario">
-    <div class="conteudo">
-        <h2>
-            <span>Entenda o que é</span><br>
-            <span>intolerância religiosa</span>
-            <hr class="linha-titulo">
-        </h2>
-        <p>
-            Intolerância religiosa é a falta de respeito pelas crenças e práticas religiosas de outras pessoas.
-            Ela pode se manifestar por meio de discriminação, discursos de ódio, agressões ou impedimento da liberdade de culto.
-            Combater a intolerância é promover o direito de todos exercerem sua fé com liberdade e segurança.
+        
+        <p class="hero-resumo">
+            Intolerância religiosa é a falta de respeito pelas crenças alheias. 
+            Combater a discriminação é garantir que todos possam exercer sua fé com liberdade e segurança.
         </p>
+
+        <a href="{{ url_for('questionario') }}" class="btn-cta">Participar da Pesquisa</a>
+    </div>
+
+    <div class="hero-imagem">
+        <img src="{{ url_for('static', filename='intolerancia.png') }}" alt="Ilustração sobre diversidade">
     </div>
 </section>
 
