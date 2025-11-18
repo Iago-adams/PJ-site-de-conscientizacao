@@ -101,19 +101,39 @@
       height: 300px !important;
     }
 
+    /* --- NOVO CSS PARA AS ESTATÍSTICAS --- */
+    .estatisticas-container {
+      width: 100%;
+      margin-top: 25px;
+      padding-top: 15px;
+      border-top: 2px solid #f0f0f0;
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    .stat-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      padding: 4px 0;
+    }
+
+    .stat-label {
+      font-weight: bold;
+      color: #0b6477;
+    }
+    
+    .stat-valor {
+      color: #333;
+      text-align: right;
+      font-weight: 500;
+    }
+    /* ------------------------------------- */
+
     @media (max-width: 768px) {
-      h1 {
-        font-size: 2rem;
-      }
-
-      .grafico-container h3 {
-        font-size: 1.1rem;
-      }
-
-      canvas {
-        max-width: 240px;
-        height: 240px !important;
-      }
+      h1 { font-size: 2rem; }
+      .grafico-container h3 { font-size: 1.1rem; }
+      canvas { max-width: 240px; height: 240px !important; }
     }
   </style>
 </head>
@@ -137,8 +157,24 @@
     {% for dado in dados %}
       <div class="grafico-container">
         <h3>{{ dado.questao }}</h3>
+        
         <canvas id="grafico{{ loop.index }}"></canvas>
-      </div>
+
+        <div class="estatisticas-container">
+            <div class="stat-item">
+                <span class="stat-label">Moda:</span>
+                <span class="stat-valor">{{ dado.moda }}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Média (votos/opção):</span>
+                <span class="stat-valor">{{ dado.media }}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Mediana:</span>
+                <span class="stat-valor">{{ dado.mediana }}</span>
+            </div>
+        </div>
+        </div>
     {% endfor %}
   </div>
 
@@ -168,19 +204,13 @@
             legend: {
               position: 'bottom',
               labels: {
-                font: {
-                  size: 14
-                },
+                font: { size: 14 },
                 color: '#333'
               }
             },
             tooltip: {
-              titleFont: {
-                size: 16
-              },
-              bodyFont: {
-                size: 14
-              },
+              titleFont: { size: 16 },
+              bodyFont: { size: 14 },
               callbacks: {
                 label: function(context) {
                   const label = context.label || '';
