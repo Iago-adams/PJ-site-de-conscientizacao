@@ -1,35 +1,217 @@
 {% extends "base.html" %}
 
-{% block title %}Sobre Nós{% endblock %}
+{% block title %}Sobre o Projeto e Equipe{% endblock %}
 
 {% block content %}
-<section class="sobre-nos">
-    <div class="texto-topo">
-        <h1>Quem Somos</h1>
-        <p>Somos um grupo comprometido com a conscientização sobre a intolerância religiosa. Este projeto foi construído com colaboração, respeito e dedicação por todos os envolvidos.</p>
+
+<style>
+    /* --- CSS DA PÁGINA SOBRE --- */
+    .container-sobre {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        font-family: 'Arial', sans-serif;
+        color: #333;
+    }
+
+    /* Títulos e Textos */
+    .intro-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .intro-header h1 {
+        color: #0b6477;
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+
+    .intro-header p {
+        font-size: 1.2rem;
+        color: #666;
+    }
+
+    /* Cards de Texto (Contexto, Matemática, Resultados) */
+    .info-card {
+        background: white;
+        padding: 35px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        margin-bottom: 40px;
+        border-left: 6px solid #0b6477; /* Detalhe lateral bonito */
+    }
+
+    .info-card h2 {
+        color: #0b6477;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+
+    .info-card p, .info-card li {
+        font-size: 1.05rem;
+        line-height: 1.7;
+        margin-bottom: 15px;
+        text-align: justify;
+    }
+
+    .info-card ul {
+        padding-left: 20px;
+        margin-bottom: 20px;
+    }
+
+    /* Caixa de destaque para termos matemáticos */
+    .box-matematica {
+        background-color: #eaf6f8;
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid #ccedee;
+    }
+
+    .box-matematica strong {
+        color: #084a57;
+    }
+
+    /* --- ESTILO DA EQUIPE (O seu original melhorado) --- */
+    .secao-equipe {
+        margin-top: 80px;
+        text-align: center;
+    }
+
+    .secao-equipe h2 {
+        font-size: 2.2rem;
+        color: #333;
+        margin-bottom: 40px;
+    }
+
+    .equipe-grid {
+        display: flex;
+        justify-content: center; /* Centraliza os membros */
+        flex-wrap: wrap; /* Permite quebrar linha se a tela for pequena */
+        gap: 30px;
+    }
+
+    .membro-card {
+        text-align: center;
+        width: 150px;
+        transition: transform 0.3s;
+    }
+
+    .membro-card:hover {
+        transform: scale(1.05);
+    }
+
+    .membro-card img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%; /* Deixa a foto redonda */
+        object-fit: cover;
+        border: 4px solid #0b6477;
+        margin-bottom: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .membro-card p {
+        font-weight: bold;
+        color: #0b6477;
+        font-size: 1.1rem;
+    }
+
+    /* Responsividade */
+    @media (max-width: 700px) {
+        .equipe-grid {
+            gap: 15px;
+        }
+        .membro-card {
+            width: 45%; /* No celular fica 2 por linha */
+        }
+    }
+</style>
+
+<div class="container-sobre">
+
+    <div class="intro-header">
+        <h1>Sobre a Pesquisa</h1>
+        <p>Entenda o contexto, a metodologia e as conclusões do nosso trabalho.</p>
     </div>
 
-    <div class="equipe">
-        <div class="membro">
-            <img src="{{ url_for('static', filename='pessoa1.png') }}" alt="Pessoa 1">
-            <p>Bianca </p>
+    <section class="info-card">
+        <h2>🕊️ O Contexto: Intolerância Religiosa</h2>
+        <p>
+            A intolerância religiosa é o ato de discriminar, ofender ou agredir pessoas por causa de suas crenças ou da falta delas. 
+            No Brasil, apesar da diversidade cultural, casos de violência contra terreiros e templos têm crescido, tornando urgente o debate sobre respeito e convivência.
+        </p>
+        <p>
+            Nosso grupo decidiu investigar como esse tema é percebido pelas pessoas ao nosso redor: Será que elas acham que a intolerância está aumentando? 
+            Quais medidas elas acreditam ser eficazes? Quem são as maiores vítimas?
+        </p>
+    </section>
+
+    <section class="info-card">
+        <h2>📊 A Matemática por trás dos dados</h2>
+        <p>
+            Para transformar opiniões em fatos analisáveis, utilizamos a <strong>Estatística</strong>. 
+            O site coleta votos em tempo real e calcula automaticamente três medidas de tendência central fundamentais:
+        </p>
+        <div class="box-matematica">
+            <ul>
+                <li><strong>Moda:</strong> Mostra a resposta "vencedora" (a opinião mais comum entre os entrevistados).</li>
+                <li><strong>Média:</strong> Calculamos a média de votos por opção para entender a distribuição da participação.</li>
+                <li><strong>Mediana:</strong> O valor central que divide os dados, ajudando a entender o comportamento do grupo sem a distorção de extremos.</li>
+            </ul>
         </div>
-        <div class="membro">
-            <img src="{{ url_for('static', filename='pessoa1.png') }}" alt="Pessoa 2">
-            <p>Gragório</p>
+    </section>
+
+    <section class="info-card">
+        <h2>🔍 Conclusão dos Resultados</h2>
+        <p>
+            Analisando os gráficos gerados pela nossa pesquisa, chegamos a conclusões importantes sobre a percepção pública:
+        </p>
+        <ul>
+            <li><strong>Educação vence Punição:</strong> A "Moda" das respostas indica que a maioria das pessoas acredita que a solução para a intolerância não é apenas criar leis mais duras, mas sim investir em <strong>ações educativas</strong> e campanhas de conscientização nas escolas.</li>
+            
+            <li><strong>O Papel da Família:</strong> Os dados mostram que a "Influência da família ou cultura" é apontada como a principal causa do preconceito, sugerindo que a intolerância muitas vezes começa em casa.</li>
+            
+            <li><strong>Sensação de Aumento:</strong> Uma grande parte dos participantes percebe que a intolerância religiosa está <strong>aumentando</strong> ou se mantendo estável, o que reforça a gravidade do problema social.</li>
+        </ul>
+        <p>
+            <strong>Conclusão Final:</strong> A matemática nos mostrou que, embora o problema seja grave, a comunidade enxerga o caminho da solução através do diálogo e do conhecimento, e não da violência.
+        </p>
+    </section>
+
+    <section class="secao-equipe">
+        <h2>Quem Somos</h2>
+        <p style="margin-bottom: 30px; color: #666;">
+            Projeto construído com colaboração, respeito e dedicação.
+        </p>
+
+        <div class="equipe-grid">
+            <div class="membro-card">
+                <img src="{{ url_for('static', filename='pessoa1.png') }}" alt="Bianca">
+                <p>Bianca</p>
+            </div>
+            
+            <div class="membro-card">
+                <img src="{{ url_for('static', filename='pessoa1.png') }}" alt="Gragório">
+                <p>Gragório</p>
+            </div>
+            
+            <div class="membro-card">
+                <img src="{{ url_for('static', filename='pessoa1.png') }}" alt="Iago">
+                <p>Iago</p>
+            </div>
+            
+            <div class="membro-card">
+                <img src="{{ url_for('static', filename='pessoa1.png') }}" alt="Laísa">
+                <p>Laísa</p>
+            </div>
+            
+            <div class="membro-card">
+                <img src="{{ url_for('static', filename='pessoa1.png') }}" alt="Sergio">
+                <p>Sergio</p>
+            </div>
         </div>
-        <div class="membro">
-            <img src="{{ url_for('static', filename='pessoa1.png') }}" alt="Pessoa 3">
-            <p>Iago</p>
-        </div>
-        <div class="membro">
-            <img src="{{ url_for('static', filename='pessoa1.png') }}" alt="Pessoa 4">
-            <p>Laísa</p>
-        </div>
-        <div class="membro">
-            <img src="{{ url_for('static', filename='pessoa1.png') }}" alt="Pessoa 5">
-            <p>Sergio</p>
-        </div>
-    </div>
-</section>
+    </section>
+
+</div>
+
 {% endblock %}
